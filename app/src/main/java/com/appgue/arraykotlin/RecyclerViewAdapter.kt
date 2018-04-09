@@ -7,10 +7,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_list.view.*
-import org.jetbrains.anko.intentFor
 
 /**
  * Created by Andri on 4/3/2018.
@@ -24,13 +22,15 @@ class RecyclerViewAdapter(private val context: Context, private val items: List<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(items[position])
+        //beri listener ketika di klik, kemudian lempar ke activity detail club
         holder.itemView.setOnClickListener {
-            //Toast.makeText(this@MainActivity, "Ini diklik bro!", Toast.LENGTH_SHORT).show()
-            //Toast.makeText(context, "Position " + position, Toast.LENGTH_SHORT).show()
+            //intent cara lama
             val intent = Intent(this.context, DetailClubActivity::class.java).apply {
                 putExtra("id", position.toString())
             }
             this.context.startActivity(intent)
+            //intent cara baru kotlin, still not working :(
+            //startActivity(intentFor<SecondActivity>("id" to position.toString()).singleTop())
         }
     }
 
