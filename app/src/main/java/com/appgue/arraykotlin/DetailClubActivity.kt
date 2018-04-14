@@ -3,6 +3,7 @@ package com.appgue.arraykotlin
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
+import com.appgue.arraykotlin.R.array.*
 import kotlinx.android.synthetic.main.activity_detail_club.*
 import com.bumptech.glide.Glide
 import org.jetbrains.anko.*
@@ -11,23 +12,15 @@ class DetailClubActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //cara lama set content view
-        //setContentView(R.layout.activity_detail_club)
-        //menggunakan anko layout
         DetailClubActivityUI().setContentView(this)
 
         //dapatkan data dari intent
         val data = intent.extras.getString("id")
 
-        //dapatkan array club logo, name dan description
-        val clubdesc = resources.getStringArray(R.array.club_desc)
-        val clubname = resources.getStringArray(R.array.club_name)
-        val logo = resources.obtainTypedArray(R.array.club_image)
-
         //masukkan nilai item yang diklik ke dalam textview dan image
-        descDetail.text = clubdesc[data.toInt()].toString()
-        clubName.text = clubname[data.toInt()].toString()
-        Glide.with(this).load(logo.getResourceId(data.toInt(),0)).into(logoDetail)
+        descDetail.text = resources.getStringArray(club_desc)[data.toInt()].toString()
+        clubName.text = resources.getStringArray(club_name)[data.toInt()].toString()
+        Glide.with(this).load(resources.obtainTypedArray(club_image).getResourceId(data.toInt(),0)).into(logoDetail)
     }
 }
 
